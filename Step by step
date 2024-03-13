@@ -1,1 +1,6 @@
 1.django-admin startproject notes
+2.docker run --name noteapp-postgres -p 5432:5432 -e POSTGRES_PASSWORD=567234 -d postgres
+3.python manage.py migrate
+4.python manage.py createsuperuser
+5.python manage.py runserver
+
