@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "noteapp/base.html" %}
 
-</body>
-</html>
+{% block content %}
+
+<form method="POST" action="{% url 'noteapp:tag' %}">
+    {% csrf_token %}
+    <div style="padding: 10px">
+        <label>Enter the tag name:
+            {{form.name}}
+        </label>
+        <span>{{ form.errors.name }}</span>
+    </div>
+    <div class="grid">
+        <button type="submit">Submit</button>
+        <button type="reset" class="secondary">Reset</button>
+    </div>
+</form>
+
+{% endblock %}
