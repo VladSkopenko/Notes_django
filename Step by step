@@ -5,5 +5,5 @@
 5.python manage.py runserver
 6.python manage.py startapp noteapp
 7.python manage.py makemigrations
-
+8.{% csrf_token %} для захисту від міжсайтової підробки запиту. 
 
