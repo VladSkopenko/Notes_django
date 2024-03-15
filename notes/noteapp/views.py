@@ -3,7 +3,6 @@ from .forms import TagForm, NoteForm
 from .models import Tag
 
 
-# Create your views here.
 def main(request):
     return render(request, 'noteapp/index.html')
 
