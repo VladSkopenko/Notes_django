@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import TagForm, NoteForm
-from .models import Tag
+from .models import Tag, Note
 
 
 def main(request):
@@ -36,3 +36,8 @@ def note(request):
             return render(request, 'noteapp/note.html', {"tags": tags, 'form': form})
 
     return render(request, 'noteapp/note.html', {"tags": tags, 'form': NoteForm()})
+
+
+def detail(request, note_id):
+    note = get_object_or_404(Note, pk=note_id)
+    return render(request, 'noteapp/detail.html', {"note": note})
