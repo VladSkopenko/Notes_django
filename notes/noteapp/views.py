@@ -1,12 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import TagForm, NoteForm
 from .models import Tag, Note
-
+from django.contrib.auth.decorators import login_required
 
 def main(request):
-    notes = Note.objects.all()
+    notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     return render(request, 'noteapp/index.html', {"notes": notes})
-
 
 def set_done(request, note_id):
     Note.objects.filter(pk=note_id).update(done=True)
@@ -18,11 +17,14 @@ def delete_note(request, note_id):
     return redirect(to='noteapp:main')
 
 
+@login_required
 def tag(request):
     if request.method == 'POST':
         form = TagForm(request.POST)
         if form.is_valid():
-            form.save()
+            tag = form.save(commit=False)
+            tag.user = request.user
+            tag.save()
             return redirect(to='noteapp:main')
         else:
             return render(request, 'noteapp/tag.html', {'form': form})
