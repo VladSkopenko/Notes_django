@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
+
 def register(request):
     if request.user.is_authenticated:
         return redirect(to='noteapp:main')
@@ -19,9 +20,10 @@ def register(request):
 
     return render(request, 'users/register.html', context={"form": RegisterForm()})
 
+
 def loginuser(request):
     if request.user.is_authenticated:
-       return redirect(to='noteapp:main')
+        return redirect(to='noteapp:main')
 
     if request.method == 'POST':
         user = authenticate(username=request.POST['username'], password=request.POST['password'])
@@ -33,7 +35,6 @@ def loginuser(request):
         return redirect(to='noteapp:main')
 
     return render(request, 'users/login.html', context={"form": LoginForm()})
-
 
 
 @login_required
