@@ -7,15 +7,16 @@ def main(request):
     notes = Note.objects.filter(user=request.user).all() if request.user.is_authenticated else []
     return render(request, 'noteapp/index.html', {"notes": notes})
 
+@login_required
 def set_done(request, note_id):
-    Note.objects.filter(pk=note_id).update(done=True)
+    Note.objects.filter(pk=note_id, user=request.user).update(done=True)
     return redirect(to='noteapp:main')
 
 
+@login_required
 def delete_note(request, note_id):
-    Note.objects.get(pk=note_id).delete()
+    Note.objects.get(pk=note_id, user=request.user).delete()
     return redirect(to='noteapp:main')
-
 
 @login_required
 def tag(request):
