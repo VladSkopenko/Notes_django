@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm
 
 
-def signupuser(request):
+def register(request):
     if request.user.is_authenticated:
         return redirect(to='noteapp:main')
 
@@ -13,6 +13,6 @@ def signupuser(request):
             form.save()
             return redirect(to='noteapp:main')
         else:
-            return render(request, 'users/signup.html', context={"form": form})
+            return render(request, 'users/register.html', context={"form": form})
 
-    return render(request, 'users/signup.html', context={"form": RegisterForm()})
+    return render(request, 'users/register.html', context={"form": RegisterForm()})
