@@ -53,6 +53,7 @@ def note(request):
     return render(request, 'noteapp/note.html', {"tags": tags, 'form': NoteForm()})
 
 
+@login_required
 def detail(request, note_id):
-    note = get_object_or_404(Note, pk=note_id)
+    note = get_object_or_404(Note, pk=note_id, user=request.user)
     return render(request, 'noteapp/detail.html', {"note": note})
