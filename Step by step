@@ -7,5 +7,7 @@
 7.python manage.py makemigrations
 8.{% csrf_token %} для захисту від міжсайтової підробки запиту.
 9.python manage.py startapp users
+10.python manage.py makemigrations
+11.python manage.py migrate
 
 
