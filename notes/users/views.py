@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from .forms import RegisterForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.user.is_authenticated:
@@ -32,3 +33,10 @@ def loginuser(request):
         return redirect(to='noteapp:main')
 
     return render(request, 'users/login.html', context={"form": LoginForm()})
+
+
+
+@login_required
+def logoutuser(request):
+    logout(request)
+    return redirect(to='noteapp:main')
