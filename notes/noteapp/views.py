@@ -32,15 +32,17 @@ def tag(request):
     return render(request, 'noteapp/tag.html', {'form': TagForm()})
 
 
+@login_required
 def note(request):
-    tags = Tag.objects.all()
+    tags = Tag.objects.filter(user=request.user).all()
 
     if request.method == 'POST':
         form = NoteForm(request.POST)
         if form.is_valid():
-            new_note = form.save()
-
-            choice_tags = Tag.objects.filter(name__in=request.POST.getlist('tags'))
+            new_note = form.save(commit=False)
+            new_note.user = request.user
+            new_note.save()
+            choice_tags = Tag.objects.filter(name__in=request.POST.getlist('tags'), user=request.user)
             for tag in choice_tags.iterator():
                 new_note.tags.add(tag)
 
