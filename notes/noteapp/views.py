@@ -64,6 +64,4 @@ def detail(request, note_id):
     return render(request, 'noteapp/detail.html', {"note": note})
 
 
-@login_required
-def profile(request):
-    return render(request, 'users/profile.html')
+
