@@ -9,5 +9,5 @@
 9.python manage.py startapp users
 10.python manage.py makemigrations
 11.python manage.py migrate
-
+12Профіль користувача
 
